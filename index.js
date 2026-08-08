@@ -28,7 +28,17 @@ function auth(req, res, next) {
 }
 
 // ============= MCP 协议支持 =============
-
+// MCP 协议入口 - 支持 GET 请求（用于 Chatbox 测试连接）
+app.get("/mcp", (req, res) => {
+  res.json({
+    jsonrpc: "2.0",
+    result: {
+      protocolVersion: "0.1.0",
+      capabilities: { tools: {} },
+      serverInfo: { name: "svakom-mcp-server", version: "1.0.0" }
+    }
+  });
+});
 // MCP 协议入口 (Chatbox 连接用)
 app.post("/mcp", async (req, res) => {
   try {
